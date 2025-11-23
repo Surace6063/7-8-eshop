@@ -1,0 +1,187 @@
+// <<<<<<<<<<<<<<<<<<<<<<<< hero section >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+import React from "react";
+import Button from "./ui/Button";
+import MaxWidthContainer from "./MaxWidthContainer";
+
+const HeroSection = () => {
+  return (
+    <section className="relative w-full h-auto lg:min-h-[60vh] bg-white overflow-hidden my-4 md:my-10">
+      <MaxWidthContainer className="grid grid-cols-1 lg:grid-cols-2 gap-8 py-10 items-center">
+
+        {/* LEFT TEXT */}
+        <div className="flex flex-col items-center justify-center lg:items-start">
+          <h1 className="text-2xl md:text-4xl font-black leading-tight text-gray-900 text-center lg:text-start">
+            Transform your shopping experience with
+            <span className="text-primary block">ShopFlow</span>
+          </h1>
+
+          <p className="mt-4 text-sm md:text-base text-center md:text-start text-gray-600 max-w-md">
+            A next-generation eCommerce platform designed for performance,
+            personalization, and seamless shopping.
+          </p>
+
+          <div className="mt-6 flex gap-3">
+            <Button>Start Shopping</Button>
+            <Button variant="outline">Explore Products</Button>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE — SINGLE IMAGE */}
+        <div className="lg:h-[40vh] w-full">
+          <div className="hidden lg:block rounded-2xl overflow-hidden h-full w-full shadow-lg shadow-pink-100">
+            <img
+              src="f-2.jpg"
+              alt="featured product"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+
+      </MaxWidthContainer>
+    </section>
+  );
+}
+
+export default HeroSection
+
+
+
+
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Footer.jsx >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+import MaxWidthContainer from "./MaxWidthContainer";
+
+const Footer = () => {
+  return (
+    <footer className="w-full bg-gray-50 border-t border-slate-200 py-12 mt-10">
+      <MaxWidthContainer
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10"
+      >
+        {/* BRAND / DESCRIPTION */}
+        <div className="max-w-sm col-span-1 lg:col-span-2">
+          <h2 className="text-xl md:text-2xl font-semibold text-primary">
+            Eshop
+          </h2>
+          <p className="mt-3 text-gray-700 leading-relaxed text-base md:text-lg">
+            Your trusted online store for premium products, fast delivery, and
+            amazing deals — serving customers worldwide since 2020.
+          </p>
+        </div>
+
+        {/* SHOP */}
+        <div>
+          <h3 className="text-gray-900 font-semibold text-lg mb-4">Shop</h3>
+          <ul className="flex flex-col gap-2 text-gray-600 text-sm md:text-base">
+            <li className="hover:text-gray-900 cursor-pointer">New Arrivals</li>
+            <li className="hover:text-gray-900 cursor-pointer">Best Sellers</li>
+            <li className="hover:text-gray-900 cursor-pointer">Sale</li>
+            <li className="hover:text-gray-900 cursor-pointer">Gift Cards</li>
+          </ul>
+        </div>
+
+        {/* CUSTOMER SERVICE */}
+        <div>
+          <h3 className="text-gray-900 font-semibold text-lg mb-4">
+            Customer Service
+          </h3>
+          <ul className="flex flex-col gap-2 text-gray-600 text-sm md:text-base">
+            <li className="hover:text-gray-900 cursor-pointer">Help Center</li>
+            <li className="hover:text-gray-900 cursor-pointer">Shipping Info</li>
+            <li className="hover:text-gray-900 cursor-pointer">
+              Returns & Refunds
+            </li>
+            <li className="hover:text-gray-900 cursor-pointer">Track Order</li>
+          </ul>
+        </div>
+
+        {/* COMPANY */}
+        <div>
+          <h3 className="text-gray-900 font-semibold text-lg mb-4">Company</h3>
+          <ul className="flex flex-col gap-2 text-gray-600 text-sm md:text-base">
+            <li className="hover:text-gray-900 cursor-pointer">About Us</li>
+            <li className="hover:text-gray-900 cursor-pointer">Blog</li>
+            <li className="hover:text-gray-900 cursor-pointer">Careers</li>
+            <li className="hover:text-gray-900 cursor-pointer">Contact</li>
+          </ul>
+        </div>
+      </MaxWidthContainer>
+
+      {/* COPYRIGHT */}
+      <div className="border-t border-slate-300 mt-10 pt-6 text-center text-gray-500 text-xs md:text-sm">
+        © {new Date().getFullYear()} Eshop — All rights reserved.
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<< Button.jsx >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+import { cn } from "../../libs/utils";
+
+const Button = ({
+  children,
+  variant = "primary",
+  size = "md",
+  className,
+  disabled = false,
+  ref,
+  ...props
+}) => {
+  const baseClassName = cn(
+    "rounded-full cursor-pointer transition-all inline-flex items-center justify-center",
+    disabled && "opacity-50 cursor-not-allowed"
+  );
+
+  const variants = {
+    primary: "bg-primary hover:bg-primary/60 text-white shadow",
+    ghost: "text-primary hover:underline",
+    outline: "border border-pink-500 text-primary hover:bg-pink-50/50",
+    icon: "rounded-full border border-gray-300 hover:bg-gray-100 transition"
+  };
+
+  const sizes = {
+    sm: "px-4 py-1 text-sm",
+    md: "px-6 py-2 text-sm",
+    lg: "px-8 py-3 text-base",
+    icon: "p-2"
+  };
+
+  return (
+    <button
+      className={cn(baseClassName, variants[variant], sizes[size], className)}
+      disabled={disabled}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;
