@@ -28,7 +28,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAdminUserOrReadOnly]
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     
-    filterset_fields = ['category__name']   # http://127.0.0.1:8000/api/products/?category=category_name
+    filterset_fields = ['category__name']   # http://127.0.0.1:8000/api/products/?category__name=
     search_fields = ['title', 'description'] # http://127.0.0.1:8000/api/products/?search=search_data
     ordering_fields = ['price']  # http://127.0.0.1:8000/api/products/?ordering = price or created_at
     ordering = ['-created_at']   # setting default ordering to -created_at
