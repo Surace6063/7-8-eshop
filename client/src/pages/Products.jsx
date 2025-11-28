@@ -5,6 +5,7 @@ import SortFilter from "../components/filters/SortFilter";
 import MaxWidthContainer from "../components/MaxWidthContainer";
 import ProductCard from "../components/ProductCard";
 import { useSearchParams } from "react-router-dom";
+import Button from "../components/ui/Button";
 
 const Products = () => {
   const [searchParams,setSearchParams] = useSearchParams()
@@ -13,18 +14,35 @@ const Products = () => {
 
   const [category,setCategory] = useState(searchParams.get('category') || "")
   const [sort,setSort] = useState(searchParams.get('sort') || '')
-
+  const [page,setPage] = useState(1)
 
   // console.log(category);
 
-  const { data: products, isLoading, isError, error } = useProducts({category,sort});
+  const { data: products, isLoading, isError, error } = useProducts({category,sort,page});
+
+    // handle previous pagination
+  const handlePrevious = () => {
+    if(products?.links?.previous){
+      setPage(page - 1)
+    }
+  }
+
+  // handle next pagination
+  const handleNext = () => {
+    if(products?.links?.next){
+      setPage(page + 1)
+    }
+  }
 
   useEffect(()=>{
     const params = {}
      if(category) params.category = category
      if(sort) params.sort = sort
+     if(page) params.page = page
      setSearchParams(params)
-  },[category,setSearchParams,sort])
+  },[category,setSearchParams,sort,page])
+
+
 
   return (
     <MaxWidthContainer className="my-10">
@@ -50,7 +68,22 @@ const Products = () => {
           ))
         )}
       </div>
+      {/* pagination */}
+      <div className="mt-8 flex justify-center">
+        <div className="flex justify-center gap-4 items-center">
+          <Button disabled={!products?.links?.previous} onClick={handlePrevious} variant="outline" className="border-gray-300 text-gray-700">
+             previous
+          </Button>
+          <span className="text-gray-600 font-medium">
+            {products?.current_page} / {products?.total_pages}
+          </span>
+           <Button disabled={!products?.links?.next} onClick={handleNext} variant="outline" className="border-gray-300 text-gray-700">
+             next
+          </Button>
+        </div>
+      </div>
     </MaxWidthContainer>
   );
 };
 export default Products;
+

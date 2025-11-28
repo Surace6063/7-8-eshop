@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom"
+
 const ProductCard = ({item}) => {
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
+   <Link to={`/products/${item.slug}/${item.id}`}>
+      <div className="border border-gray-200 rounded-lg overflow-hidden">
       <img src={item.image} alt={item.title} 
       className=" aspect-square" />
       <div className="p-2">
@@ -16,6 +19,7 @@ const ProductCard = ({item}) => {
         </p>
       </div>
     </div>
+   </Link>
   )
 }
 export default ProductCard

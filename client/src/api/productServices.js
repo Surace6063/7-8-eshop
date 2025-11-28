@@ -2,15 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "../libs/apiRequest";
 
 // get all products
-export const useProducts = ({page_size=10, category="",sort}) =>
+export const useProducts = ({page_size=10, category="",sort,page=1}) =>
   useQuery({
-    queryKey: ["products",page_size,category,sort],
+    queryKey: ["products",page_size,category,sort,page],
     queryFn: async () => {
       const response = await apiRequest.get("/products/", {
         params: {
           page_size: page_size,
           category__name : category,
-          ordering:sort
+          ordering:sort,
+          page: page
         },
       });
       console.log(response.data);
