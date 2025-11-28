@@ -18,3 +18,15 @@ export const useProducts = ({page_size=10, category="",sort,page=1}) =>
       return response.data;
     },
   });
+
+
+  // get single product
+export const useProduct = (id) =>
+  useQuery({
+    queryKey: ["product",id],
+    queryFn: async () => {
+      const response = await apiRequest.get(`/products/${id}`);
+      console.log(response.data);
+      return response.data;
+    },
+  });
