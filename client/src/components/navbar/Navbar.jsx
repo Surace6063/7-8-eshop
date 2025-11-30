@@ -3,6 +3,7 @@ import MaxWidthContainer from "../MaxWidthContainer"
 import Button from "../ui/Button"
 import SearchBar from "../SearchBar"
 import { Link } from "react-router-dom"
+import AuthDialog from "../auth-dialog/AuthDialog"
 
 const Navbar = () => {
   return (
@@ -19,13 +20,8 @@ const Navbar = () => {
 
          {/* right side */}
          <div className="flex gap-4 items-center">
-          <Button variant="ghost">
-            sign in
-          </Button>
-
-          <Button>
-            sign up
-          </Button>
+          <AuthDialog />
+         
 
           <ShoppingBag />
          </div>
