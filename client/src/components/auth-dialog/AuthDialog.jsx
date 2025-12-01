@@ -45,7 +45,13 @@ const AuthDialog = () => {
                 {toggleForm === "sign-in" ? "Sign In" : "Sign Up"}
               </DialogTitle>
               <div>
-                {toggleForm === "sign-in" ? <SignInForm /> : <SignUpForm />}</div>
+                {toggleForm === "sign-in" ? <SignInForm setIsOpen={setIsOpen} /> : <SignUpForm setToggleForm={setToggleForm} />}</div>
+
+                <div className="mt-3 text-gray-600 text-sm text-center">
+                    {
+                        toggleForm === "sign-in" ? <p>Dont have an account? <span className="text-primary hover:underline cursor-pointer" onClick={()=>setToggleForm('sign-un')}>sign up</span></p> : <p>Already have an account? <span className="text-primary hover:underline cursor-pointer" onClick={()=>setToggleForm('sign-in')}>sign in</span></p>
+                    }
+                </div>
             </DialogPanel>
           </div>
         </div>
