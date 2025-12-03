@@ -6,9 +6,10 @@ import { Link } from "react-router-dom"
 import AuthDialog from "../auth-dialog/AuthDialog"
 import MobileNavigation from "./MobileNavigation"
 import { useAuthStore } from "../../zustand/useAuthStore"
+import ProfileMenu from "../ProfileMenu"
 
 const Navbar = () => {
-  const {user} = useAuthStore()
+  const {isAuthenticated} = useAuthStore()
   
   return (
     <div className="border-b border-gray-300 py-4 bg-white">
@@ -24,11 +25,13 @@ const Navbar = () => {
          </div>
 
          {/* right side */}
-         <div className="flex gap-4 items-center">
+         <div className="flex gap-6 items-center">
            {
-            user ? <span>user profile</span> : <AuthDialog />
+            isAuthenticated ? <ProfileMenu /> : <AuthDialog />
            }
-          <ShoppingBag />
+         <Link to="/cart">
+            <ShoppingBag className="text-gray-500" />
+         </Link>
          </div>
        </MaxWidthContainer>
     </div>

@@ -3,17 +3,34 @@ import MaxWidthContainer from "../components/MaxWidthContainer";
 import Button from "../components/ui/Button";
 import { useParams } from "react-router-dom";
 import { useProduct } from "../api/productServices";
+import { apiRequest } from "../libs/apiRequest";
+import toast from "react-hot-toast";
 
 const ProductDetailPage = () => {
   const [quantity, setQuantity] = useState(1);
-
+  
+  // accessing product id from url
   const {id} = useParams()
-  console.log(id);
-
+  
+  // accessing single product
   const {data:product,isLoading,isError,error} = useProduct(id)
 
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
+
+  // handle add to cart
+  const handleAddToCart = async () => {
+    try {
+      await apiRequest.post('/carts/add/',{
+        product: id,
+        quantity
+      })
+
+      toast.success("item added to cart sucessfully.")
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   if(isLoading) return <span>loaging....</span>
   if(isError) return <p>{error.message}</p>
@@ -58,7 +75,7 @@ const ProductDetailPage = () => {
               +
             </button>
             {/* Add to cart button */}
-          <Button className="bg-slate-800 hover:bg-slate-800/80"
+          <Button onClick={handleAddToCart} className="bg-slate-800 hover:bg-slate-800/80"
           >
             Add to Cart
           </Button>

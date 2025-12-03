@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Products from "./pages/Products"
 import ProductDetailPage from "./pages/ProductDetailPage"
 import {Toaster} from "react-hot-toast"
+import CartPage from "./pages/CartPage"
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:slug/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
        </Route>
 
      </Routes>

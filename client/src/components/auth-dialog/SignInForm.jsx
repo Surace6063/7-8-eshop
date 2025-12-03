@@ -13,7 +13,7 @@ const validation = yup.object({
 });
 
 const SignInForm = ({setIsOpen}) => {
-  const {setUser} = useAuthStore()
+  const {setTokens} = useAuthStore()
 
   const {
     register,
@@ -28,7 +28,7 @@ const SignInForm = ({setIsOpen}) => {
     try {
         const response = await apiRequest.post('/auth/login/',data)
         console.log(response.data);
-        setUser(response.data)
+        setTokens(response.data)
         toast.success("user signin successfully.")
         setIsOpen(false)
     } catch (error) {
