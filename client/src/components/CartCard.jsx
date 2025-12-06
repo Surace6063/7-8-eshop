@@ -1,10 +1,20 @@
 import {X} from "lucide-react"
-import { useRemoveFromCart } from "../api/cartServices";
+import { useRemoveFromCart, useUpdateToCart } from "../api/cartServices";
+import { useEffect, useState } from "react";
 
 const CartCard = ({item}) => {
+  const [quantity,setQuantity] = useState(item.quantity)
 
   // handle remove from cart
   const {mutate} = useRemoveFromCart()
+
+  const {mutate:updateCartMutate} = useUpdateToCart()
+
+  useEffect(()=>{
+     if(quantity !== item.quantity){
+      updateCartMutate({cart:item.id,quantity})
+     }
+  },[quantity])
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition duration-300 border border-gray-100 w-full cursor-pointer group relative">
@@ -42,13 +52,16 @@ const CartCard = ({item}) => {
       {/* QUANTITY (col 8–10) */}
       <div className="flex items-center md:justify-center mt-4 md:mt-0 md:col-span-3">
         <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-3 py-2 border border-gray-200">
-          <button className="px-2 text-gray-600 text-lg cursor-pointer">–</button>
+          <button onClick={()=>{
+            if(quantity <= 1) return
+            setQuantity(quantity - 1)
+          }} className="px-2 text-gray-600 text-lg cursor-pointer">–</button>
 
           <span className="font-semibold text-gray-800 w-6 text-center">
-            {item.quantity}
+            {quantity}
           </span>
 
-          <button className="px-2 text-gray-600 text-lg cursor-pointer">+</button>
+          <button onClick={()=>setQuantity(quantity + 1)} className="px-2 text-gray-600 text-lg cursor-pointer">+</button>
         </div>
       </div>
 
