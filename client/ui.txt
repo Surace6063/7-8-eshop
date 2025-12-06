@@ -519,3 +519,24 @@ const Input = ({
   )
 }
 export default Input
+
+
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>
+<Link to="/cart" className="relative inline-block">
+  <ShoppingBag className="text-gray-500 w-6 h-6" />
+
+  <span
+    className="
+      absolute -top-2 -right-2
+      bg-primary text-white
+      text-xs font-semibold
+      w-5 h-5 flex items-center justify-center
+      rounded-full
+    "
+  >
+    {totalQuantity}
+  </span>
+</Link>
