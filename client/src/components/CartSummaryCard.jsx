@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../components/ui/Button";
 
 const CartSummaryCard = ({total}) => {
@@ -34,7 +35,9 @@ const CartSummaryCard = ({total}) => {
 
       <div className="flex flex-col gap-3">
         <Button variant="secondary">GO TO CHECKOUT</Button>
-        <Button variant="ghost">CONTINUE SHOPPING</Button>
+        <Link to="/products">
+          <Button variant="ghost">CONTINUE SHOPPING</Button>
+        </Link>
       </div>
     </div>
   );
