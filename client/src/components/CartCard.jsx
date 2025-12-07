@@ -11,10 +11,13 @@ const CartCard = ({item}) => {
   const {mutate:updateCartMutate} = useUpdateToCart()
 
   useEffect(()=>{
-     if(quantity !== item.quantity){
-      updateCartMutate({cart:item.id,quantity})
-     }
+     if(quantity === item.quantity) return
+
+     const timeOut = setTimeout(()=> updateCartMutate({cart:item.id,quantity}),500)
+     
+     return () => clearTimeout(timeOut)
   },[quantity])
+
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition duration-300 border border-gray-100 w-full cursor-pointer group relative">
