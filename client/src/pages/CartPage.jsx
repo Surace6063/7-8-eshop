@@ -6,7 +6,6 @@ import MaxWidthContainer from "../components/MaxWidthContainer";
 const CartPage = () => {
   const { data: carts, isLoading, isError, error } = useCarts();
   
-console.log(carts);
   return (
     <MaxWidthContainer>
       {isLoading ? (
