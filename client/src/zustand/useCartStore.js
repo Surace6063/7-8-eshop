@@ -16,6 +16,13 @@ export const useCartStore = create(
           totalQuantity: cartData.totalQuantity
         });
       },
+      clearUserCart: () => {
+        set({
+           carts: [],
+           totalPrice: 0,
+           totalQuantity:0,
+        });
+      },
     }),
     {
       name: "user-cart", // key in local storage

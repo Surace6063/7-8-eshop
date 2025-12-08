@@ -4,10 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "../libs/apiRequest";
 import { useAuthStore } from "../zustand/useAuthStore";
 import toast from "react-hot-toast";
+import { useCartStore } from "../zustand/useCartStore";
 
 const ProfileMenu = () => {
 // accessing logout from auth-store
 const {clearUser,setUser} = useAuthStore()
+const {clearUserCart} = useCartStore()
 
   // fetching user profile
   const { data} = useQuery({
@@ -38,7 +40,7 @@ const {clearUser,setUser} = useAuthStore()
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link className="group flex w-full justify-center font-medium hover:bg-slate-100 p-2 items-center gap-2 rounded-lg">
+            <Link to="/dashboard/main" className="group flex w-full justify-center font-medium hover:bg-slate-100 p-2 items-center gap-2 rounded-lg">
               Dashboard
             </Link>
           </MenuItem>
@@ -50,6 +52,7 @@ const {clearUser,setUser} = useAuthStore()
           <MenuItem>
             <button onClick={()=>{
                 clearUser()
+                clearUserCart()
                 toast.success("User logout sucessfully.")
             }} className="group flex w-full justify-center font-medium hover:bg-slate-100 p-2 items-center gap-2 rounded-lg">
               logout

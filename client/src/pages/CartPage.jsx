@@ -2,9 +2,16 @@ import { useCarts } from "../api/cartServices";
 import CartCard from "../components/CartCard";
 import CartSummaryCard from "../components/CartSummaryCard";
 import MaxWidthContainer from "../components/MaxWidthContainer";
+import { useAuthStore } from "../zustand/useAuthStore";
 
 const CartPage = () => {
   const { data: carts, isLoading, isError, error } = useCarts();
+  const {isAuthenticated} = useAuthStore()
+
+
+  if(!isAuthenticated){
+    return <p>please login first.</p>
+  }
   
   return (
     <MaxWidthContainer>

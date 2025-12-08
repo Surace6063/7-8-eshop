@@ -2,10 +2,12 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "../libs/apiRequest";
 import toast from "react-hot-toast";
 import { useCartStore } from "../zustand/useCartStore";
+import { useAuthStore } from "../zustand/useAuthStore";
 
 // get user cart
 export const useCarts = () => {
   const { setUserCart } = useCartStore();
+  const {isAuthenticated} = useAuthStore()
 
   return useQuery({
     queryKey: ["carts"],
@@ -14,6 +16,7 @@ export const useCarts = () => {
       setUserCart(response.data); // setting user cart info to zustand cart state
       return response.data;
     },
+    enabled: isAuthenticated
   });
 };
 

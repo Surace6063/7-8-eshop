@@ -8,11 +8,20 @@ import MobileNavigation from "./MobileNavigation";
 import { useAuthStore } from "../../zustand/useAuthStore";
 import ProfileMenu from "../ProfileMenu";
 import { useCartStore } from "../../zustand/useCartStore";
+import {useCarts} from "../../api/cartServices"
+import { useEffect } from "react";
 
 const Navbar = () => {
   const { isAuthenticated } = useAuthStore();
 
-  const { totalQuantity } = useCartStore();
+  const { totalQuantity, setUserCart } = useCartStore()
+
+  const {data:cart} = useCarts()
+
+  useEffect(()=>{
+   if(cart) setUserCart(cart)
+  },[cart])
+
 
   return (
     <div className="border-b border-gray-300 py-4 bg-white">

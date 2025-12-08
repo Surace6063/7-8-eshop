@@ -6,6 +6,7 @@ import { useProduct } from "../api/productServices";
 import { apiRequest } from "../libs/apiRequest";
 import toast from "react-hot-toast";
 import { useAddToCart } from "../api/cartServices";
+import ProductDetailSkeleton from "../components/skeleton/ProductDetailSkeleton";
 
 const ProductDetailPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -22,7 +23,7 @@ const ProductDetailPage = () => {
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
-  if(isLoading) return <span>loaging....</span>
+  if(isLoading) return <ProductDetailSkeleton />
   if(isError) return <p>{error.message}</p>
 
   return (

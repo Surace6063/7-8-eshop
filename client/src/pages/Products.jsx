@@ -7,6 +7,7 @@ import ProductCard from "../components/ProductCard";
 import { useSearchParams } from "react-router-dom";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
+import ProductSkeleton from "../components/skeleton/ProductSkeleton";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -106,7 +107,11 @@ const Products = () => {
       {/* product list */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {isLoading ? (
-          "loading..."
+          <>
+          {[...Array(10)].map((_, index) => (
+            <ProductSkeleton key={index} />
+          ))}
+        </>
         ) : isError ? (
           <p>{error.message}</p>
         ) : products.results.length === 0 ? (
