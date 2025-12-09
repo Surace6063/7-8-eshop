@@ -17,8 +17,13 @@ const navItems = [
     icon: <Package size={20} />,
     path: "/dashboard/product/list",
   },
-  { label: "Orders", icon: <ShoppingCart size={20} />, path: "/orders" },
-  { label: "Customers", icon: <Users size={20} />, path: "/customers" },
+  {
+    label: "Categories",
+    icon: <Package size={20} />,
+    path: "/dashboard/category/list",
+  },
+  { label: "Orders", icon: <ShoppingCart size={20} />, path: "/dashboard/order/list" },
+  { label: "Customers", icon: <Users size={20} />, path: "/dashboard/user/list" },
 ];
 
 const Sidebar = () => {
